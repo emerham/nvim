@@ -1,0 +1,23 @@
+local chars = {
+    '|',
+    '¦',
+    '┆',
+    '┊'
+}
+return {
+    "lukas-reineke/indent-blankline.nvim",
+    main = "ibl",
+    opts = {},
+    config = function()
+        require("ibl").setup{
+            indent = {
+                char = chars,
+                tab_char = '|',
+                highlight = {'Function', 'Label'}
+            },
+            whitespace = {
+                highlight = {"Whitespace", "Function", "Label"}
+            }
+        }
+    end
+}
