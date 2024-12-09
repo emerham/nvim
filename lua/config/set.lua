@@ -17,7 +17,7 @@ vim.opt.showbreak = '⮡'
 vim.opt.listchars = {
     leadmultispace='····|···¦···┆···┊',
     tab='→—',
-    --eol='¬'
+    eol='¬'
 }
 -- Wrap lines?
 vim.opt.wrap = false

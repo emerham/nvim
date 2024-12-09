@@ -75,20 +75,86 @@ return {
                     vim.keymap.set('n', '<F4>', '<cmd>lua vim.lsp.buf.code_action()<cr>', opts)
                 end,
             })
-
             require('mason-lspconfig').setup({
                 ensure_installed = {
                     "lua_ls",
                     "cssls",
                     "html",
                     "intelephense",
-                    "ansiblels"
+                    "ansiblels",
+                    "yamlls"
                 },
                 handlers = {
                     -- this first function is the "default handler"
                     -- it applies to every language server without a "custom handler"
                     function(server_name)
                         require('lspconfig')[server_name].setup({})
+                    end,
+                    intelephense = function()
+                        require('lspconfig').intelephense.setup({
+                            root_dir = function(fname)
+                                return vim.loop.cwd()
+                            end,
+                            settings = {
+                                intelephense = {
+                                    files = {
+                                        maxSize = 1000000,
+                                        associations={
+                                            "*.php",
+                                            "*.module",
+                                            "*.inc"
+                                        }
+                                    },
+                                    environment = {
+                                        documentRoot = "/home/brabhamm/PhpstormProjects/drupal-8-core/web",
+                                        includePaths = {
+                                            "/home/brabhamm/PhpstormProjects/drupal-8-core/web/core",
+                                            "/home/brabhamm/PhpstormProjects/drupal-8-core/vendor"
+                                        }
+                                    }
+                                },
+                            },
+                        })
+                    end,
+                    yamlls = function()
+                        require('lspconfig').yamlls.setup({
+                            settings = {
+                                yaml = {
+                                    schemas = {
+                                        ["https://json.schemastore.org/github-workflow.json"] = "/.github/workflows/*",
+                                        ["../path/relative/to/file.yml"] = "/.github/workflows/*",
+                                        ["/path/from/root/of/project"] = "/.github/workflows/*",
+                                    },
+                                }
+                            }
+                        })
+                    end,
+                    ansiblels = function()
+                        require('lspconfig').ansiblels.setup({
+                            filetypes = {
+                                "yaml.ansible"
+                            },
+                            settings = {
+                                ansible = {
+                                    ansible = {
+                                        path = "ansible"
+                                    },
+                                    executionEnvironment = {
+                                        enabled = false
+                                    },
+                                    python = {
+                                        interpreterPath = "python"
+                                    },
+                                    validation = {
+                                        enabled = true,
+                                        lint = {
+                                            enabled = true,
+                                            path = "ansible-lint"
+                                        }
+                                    }
+                                }
+                            }
+                        })
                     end,
                     lua_ls = function()
                         require('lspconfig').lua_ls.setup({
