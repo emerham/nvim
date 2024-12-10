@@ -17,3 +17,5 @@ vim.keymap.set("n", "N", "Nzzzv")
 vim.keymap.set("n", "<leader>y", "\"+y")
 vim.keymap.set("v", "<leader>y", "\"+y")
 vim.keymap.set("n", "<leader>Y", "\"+Y")
+-- Autoformat
+vim.keymap.set("n", "<leader>f", vim.lsp.buf.format)
