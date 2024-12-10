@@ -82,7 +82,8 @@ return {
                     "html",
                     "intelephense",
                     "ansiblels",
-                    "yamlls"
+                    "yamlls",
+                    'texlab',
                 },
                 handlers = {
                     -- this first function is the "default handler"
