@@ -4,17 +4,29 @@ return {
         lazy = false,
         opts = {},
     },
-
+    -- Snippet Engin
+    {
+        'L3MON4D3/LuaSnip',
+        dependencies = {
+            {"rafamadriz/friendly-snippets"},
+        }
+    },
     -- Autocompletion
     {
         'hrsh7th/nvim-cmp',
         event = 'InsertEnter',
+        dependencies = {
+            'saadparwaiz1/cmp_luasnip', -- Snippet completion for LuaSnip
+        },
         config = function()
             local cmp = require('cmp')
+            local luasnip = require("luasnip")
+            require("luasnip.loaders.from_vscode").lazy_load()
 
             cmp.setup({
                 sources = {
                     {name = 'nvim_lsp'},
+                    {name = 'luasnip'},
                 },
                 mapping = cmp.mapping.preset.insert({
                     ['<C-Space>'] = cmp.mapping.complete(),
@@ -23,13 +35,13 @@ return {
                 }),
                 snippet = {
                     expand = function(args)
-                        vim.snippet.expand(args.body)
+                        luasnip.lsp_expand(args.body)
+                        --vim.snippet.expand(args.body)
                     end,
                 },
             })
         end
     },
-
     -- LSP
     {
         'neovim/nvim-lspconfig',
@@ -47,6 +59,8 @@ return {
         end,
         config = function()
             local lsp_defaults = require('lspconfig').util.default_config
+            local capabilities = vim.lsp.protocol.make_client_capabilities()
+            capabilities.textDocument.completion.completionItem.snippetSupport = true
 
             -- Add cmp_nvim_lsp capabilities settings to lspconfig
             -- This should be executed before you configure any language server
@@ -89,7 +103,9 @@ return {
                     -- this first function is the "default handler"
                     -- it applies to every language server without a "custom handler"
                     function(server_name)
-                        require('lspconfig')[server_name].setup({})
+                        require('lspconfig')[server_name].setup({
+                            capabilities = capabilities,
+                        })
                     end,
                     intelephense = function()
                         require('lspconfig').intelephense.setup({

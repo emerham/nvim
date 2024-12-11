@@ -19,6 +19,8 @@ vim.opt.listchars = {
     tab='→—',
     eol='¬'
 }
+vim.opt.wildmenu = true
+vim.opt.wildmode = 'longest,full'
 -- Wrap lines?
 vim.opt.wrap = false
 -- Don't keep showing the search after search
