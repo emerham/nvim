@@ -1,3 +1,7 @@
+-- Disable checking if we are in a large file
+local function ts_disable(_, bufnr)
+    return vim.api.nvim_buf_line_count(bufnr) > 5000
+end
 return {
     "nvim-treesitter/nvim-treesitter",
     build = ":TSUpdate",
@@ -23,12 +27,15 @@ return {
             highlight = {
                 -- `false` will disable the whole extension
                 enable = true,
+                disable = function(lang, bufnr)
+                    return ts_disable(lang, bufnr)
+                end,
 
                 -- Setting this to true will run `:h syntax` and tree-sitter at the same time.
                 -- Set this to `true` if you depend on "syntax" being enabled (like for indentation).
                 -- Using this option may slow down your editor, and you may see some duplicate highlights.
                 -- Instead of true it can also be a list of languages
-                additional_vim_regex_highlighting = { "markdown" },
+                additional_vim_regex_highlighting = { "markdown", "latex" },
             },
         })
 
