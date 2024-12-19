@@ -1,9 +1,16 @@
+--
+local lua_line_theme
+--- Setup colors
+-- @param color the color name
 function ColorMyPencils(color)
     color = color or "rose-pine-moon"
-    -- vim.cmd.colorscheme(color)
-
-    vim.cmd.colorscheme 'dracula'
-    -- vim.cmd.colorscheme 'dracula-soft'
+    --vim.cmd.colorscheme 'dracula'
+    vim.cmd.colorscheme(color)
+    if color == 'dracula' then
+        lua_line_theme = 'dracula-nvim'
+    else
+        lua_line_theme = color
+    end
 
     vim.api.nvim_set_hl(0, "Normal", { bg = "none" })
     vim.api.nvim_set_hl(0, "NormalFloat", { bg = "none" })
@@ -40,74 +47,22 @@ return {
         end,
     },
     {
-        'maxmx03/dracula.nvim',
-        lazy = false,
-        priority = 1000,
-        config = function ()
-            ---@type dracula
-            local dracula = require "dracula"
-
-            dracula.setup({
-                styles = {
-                    Type = {},
-                    Function = {},
-                    Parameter = {},
-                    Property = {},
-                    Comment = {},
-                    String = {},
-                    Keyword = {},
-                    Identifier = {},
-                    Constant = {},
-                },
-                transparent = false,
-                on_colors = function (colors, color)
-                    ---@type dracula.palette
-                    return {
-                        -- override or create new colors
-                        mycolor = "#ffffff",
-                        -- mycolor = 0xffffff,
-                    }
-                end,
-                on_highlights = function (colors, color)
-                    ---@type dracula.highlights
-                    return {
-                        ---@type vim.api.keyset.highlight
-                        Normal = { fg = colors.mycolor }
-                    }
-                end,
-                plugins = {
-                    ["nvim-treesitter"] = true,
-                    ["rainbow-delimiters"] = true,
-                    ["nvim-lspconfig"] = true,
-                    ["nvim-navic"] = true,
-                    ["nvim-cmp"] = true,
-                    ["indent-blankline.nvim"] = true,
-                    ["neo-tree.nvim"] = true,
-                    ["nvim-tree.lua"] = true,
-                    ["which-key.nvim"] = true,
-                    ["dashboard-nvim"] = true,
-                    ["gitsigns.nvim"] = true,
-                    ["neogit"] = true,
-                    ["todo-comments.nvim"] = true,
-                    ["lazy.nvim"] = true,
-                    ["telescope.nvim"] = true,
-                    ["noice.nvim"] = true,
-                    ["hop.nvim"] = true,
-                    ["mini.statusline"] = true,
-                    ["mini.tabline"] = true,
-                    ["mini.starter"] = true,
-                    ["mini.cursorword"] = true,
-                    ['bufferline.nvim'] = true,
-                }
+        "Mofiqul/dracula.nvim",
+        config = function()
+            require('dracula').setup({
+                ColorMyPencils('dracula')
             })
-            ColorMyPencils();
-        end
+        end,
+        opts = { }
     },
     {
         'nvim-lualine/lualine.nvim',
+        dependencies = {'nvim-tree/nvim-web-devicons'},
         opts = {
             options = {
-                theme = vim.g.colors_name,
+                --theme = vim.g.colors_name,
+                theme = lua_line_theme,
+                --theme = 'dracula',
                 refresh = {
                     statusline = 1000,
                 },
