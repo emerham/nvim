@@ -60,12 +60,8 @@ return {
         dependencies = {'nvim-tree/nvim-web-devicons'},
         opts = {
             options = {
-                --theme = vim.g.colors_name,
                 theme = lua_line_theme,
-                --theme = 'dracula',
-                refresh = {
-                    statusline = 1000,
-                },
+                refresh = {},
             },
         },
     },
