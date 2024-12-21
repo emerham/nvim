@@ -40,5 +40,6 @@ vim.opt.updatetime = 50
 -- No more swap files, instead keep a permanent history
 vim.opt.swapfile = false
 vim.opt.backup = false
-vim.opt.undodir = os.getenv("HOME") .. "/.vim/undodir"
+-- HOME for Linux and USERPROFILE for Windows
+vim.opt.undodir = os.getenv("HOME") or os.getenv("USERPROFILE") .. "/.vim/undodir"
 vim.opt.undofile = true
