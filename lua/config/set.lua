@@ -41,5 +41,5 @@ vim.opt.updatetime = 50
 vim.opt.swapfile = false
 vim.opt.backup = false
 -- HOME for Linux and USERPROFILE for Windows
-vim.opt.undodir = os.getenv("HOME") or os.getenv("USERPROFILE") .. "/.vim/undodir"
+vim.opt.undodir = (os.getenv("HOME") or os.getenv("USERPROFILE")) .. "/.vim/undodir"
 vim.opt.undofile = true
