@@ -13,6 +13,8 @@ vim.opt.softtabstop = 4
 vim.opt.smartindent = true
 vim.opt.expandtab = true
 vim.opt.list = true
+vim.opt.exrc = true
+vim.opt.secure = true
 vim.opt.showbreak = '⮡'
 vim.opt.listchars = {
     leadmultispace='····|···¦···┆···┊',
@@ -43,3 +45,5 @@ vim.opt.backup = false
 -- HOME for Linux and USERPROFILE for Windows
 vim.opt.undodir = (os.getenv("HOME") or os.getenv("USERPROFILE")) .. "/.vim/undodir"
 vim.opt.undofile = true
+-- NetRW settings
+vim.g.netrw_banner = 0
