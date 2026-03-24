@@ -36,7 +36,7 @@ return {
             })
             vim.lsp.config("intelephense", {
                 cmd = { "intelephense", "--stdio" },
-                filetypes = { "php", "module", "inc", "theme" },
+                filetypes = { "php" },
                 root_markers = { "composer.json", ".git" },
                 settings = {
                     intelephense = {
