@@ -60,6 +60,23 @@ return {
                     }
                 }
             })
+            vim.lsp.config("yamlls", {
+                settings = {
+                    yaml = {
+                        validate = true,
+                        schemas = {
+                            ["https://www.schemastore.org/drupal-recipe.json"] = {
+                                "**/recipes/**/*.yml",
+                                "**/recipe.yml",
+                                "drupal-recipe.yml"
+                            },
+                        },
+                        schemaStore = {
+                            enable = true,
+                        },
+                    },
+                },
+            })
             vim.lsp.enable({
                 "lua_lsp",
                 "rust_analyzer",
