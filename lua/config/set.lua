@@ -6,6 +6,8 @@ vim.opt.mouse = ""
 vim.opt.number = true
 -- Relative numbers, even more yes
 vim.opt.relativenumber = true
+-- Encoding
+vim.opt.encoding = "utf-8"
 -- We want 4 indents
 vim.opt.tabstop = 4
 vim.opt.shiftwidth = 4

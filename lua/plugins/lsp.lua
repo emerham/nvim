@@ -8,26 +8,25 @@ return {
     },
     {
         "mason-org/mason-lspconfig.nvim",
-        opts = {
-            dependencies = {
-                { "mason-org/mason.nvim", opts = {} },
-                "neovim/nvim-lspconfig",
-            },
-            ensure_installed = {
-                "lua_ls",
-                "rust_analyzer",
-                "intelephense",
-                "html",
-                "cssls",
-                "ts_ls",
-                "eslint",
-                "yamlls",
-                "twiggy_language_server",
-                "texlab",
-                "sqls"
-            },
-            automatic_installation = true,
+        opts = { },
+        dependencies = {
+            { "mason-org/mason.nvim", opts = {} },
+            "neovim/nvim-lspconfig",
         },
+        ensure_installed = {
+            "lua_ls",
+            "rust_analyzer",
+            "intelephense",
+            "html",
+            "cssls",
+            "ts_ls",
+            "eslint",
+            "yamlls",
+            "twiggy_language_server",
+            "texlab",
+            "sqls"
+        },
+        automatic_installation = true,
         config = function(_, opts)
             require("mason").setup()
             require("mason-lspconfig").setup(opts)
@@ -37,12 +36,15 @@ return {
             vim.lsp.config("intelephense", {
                 cmd = { "intelephense", "--stdio" },
                 filetypes = { "php" },
-                root_markers = { "composer.json", ".git" },
+                root_markers = { ".git", ".env", {"composer.lock", "composer.json"} },
                 settings = {
                     intelephense = {
                         files = { maxSize = 5000000 },
                     }
                 },
+            })
+            vim.lsp.config("twiggy_language_server", {
+                filetypes = { "twig", "html.twig", "xml.twig" },
             })
             vim.lsp.config("lua_ls", {
                 settings = {
@@ -78,16 +80,17 @@ return {
                 },
             })
             vim.lsp.enable({
-                "lua_lsp",
-                "rust_analyzer",
-                "intelephense",
-                "html",
                 "cssls",
-                "ts_ls",
                 "eslint",
-                "yamlls",
+                "html",
+                "intelephense",
+                "lua_ls",
+                "rust_analyzer",
+                "sqls",
                 "texlab",
-                "sqls" })
+                "ts_ls",
+                "twiggy_language_server",
+                "yamlls" })
         end,
     },
 }
