@@ -1,34 +1,35 @@
 return {
     {
-        "mason-org/mason.nvim",
-        opts = {},
-    },
-    {
-        "neovim/nvim-lspconfig",
-    },
-    {
         "mason-org/mason-lspconfig.nvim",
-        opts = { },
+        opts = {
+            ensure_installed = {
+                "cssls",
+                "eslint",
+                "html",
+                "intelephense",
+                "lua_ls",
+                "rust_analyzer",
+                "texlab",
+                "ts_ls",
+                "twiggy_language_server",
+                "yamlls",
+                "sqls"
+            },
+        },
         dependencies = {
-            { "mason-org/mason.nvim", opts = {} },
+            { "mason-org/mason.nvim", opts = {
+                ui = {
+                    icons = {
+                        package_installed = "✓",
+                        package_pending = "→",
+                        package_uninstalled = "✗",
+                    }
+                }
+            } },
             "neovim/nvim-lspconfig",
         },
-        ensure_installed = {
-            "lua_ls",
-            "rust_analyzer",
-            "intelephense",
-            "html",
-            "cssls",
-            "ts_ls",
-            "eslint",
-            "yamlls",
-            "twiggy_language_server",
-            "texlab",
-            "sqls"
-        },
-        automatic_installation = true,
         config = function(_, opts)
-            require("mason").setup()
+            -- require("mason").setup()
             require("mason-lspconfig").setup(opts)
             vim.lsp.config("*", {
                 -- on_attach = function(client, bufnr) ... end,
@@ -91,6 +92,6 @@ return {
                 "ts_ls",
                 "twiggy_language_server",
                 "yamlls" })
-        end,
-    },
-}
+            end,
+        },
+    }

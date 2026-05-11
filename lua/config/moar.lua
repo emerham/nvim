@@ -13,5 +13,14 @@ autocmd('LspAttach', {
         vim.keymap.set("n", "K",  vim.lsp.buf.hover, opts)
         vim.keymap.set("n", "]d", vim.diagnostic.goto_next, opts)
         vim.keymap.set("n", "[d", vim.diagnostic.goto_prev, opts)
+
+        -- Conform shortcut
+        vim.keymap.set({ "n", "v" }, "<leader>f", function()
+            require("conform").format({
+                lsp_fallback = true,
+                async = true,
+                timeout_ms = 1000,
+            })
+        end, { buffer = e.buf, desc = "Conform formatter" })
     end
 })
