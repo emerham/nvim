@@ -49,3 +49,5 @@ vim.opt.undodir = (os.getenv("HOME") or os.getenv("USERPROFILE")) .. "/.vim/undo
 vim.opt.undofile = true
 -- NetRW settings
 vim.g.netrw_banner = 0
+-- Window Borders
+vim.opt.winborder = 'single'

@@ -7,3 +7,4 @@ vim.filetype.add({
         [".*%.xml%.twig"] = "xml.twig"
     },
 })
+-- Add other PHP types for Drupal

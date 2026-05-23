@@ -3,6 +3,7 @@ return {
         "mason-org/mason-lspconfig.nvim",
         opts = {
             ensure_installed = {
+                "bashls",
                 "cssls",
                 "eslint",
                 "html",
@@ -81,6 +82,7 @@ return {
                 },
             })
             vim.lsp.enable({
+                "bashls",
                 "cssls",
                 "eslint",
                 "html",

@@ -1,5 +1,5 @@
 require("config.set")
 require("config.remap")
-require("config.filetype")
+--require("config.filetype")
 require("config.moar")
 require("config.lazy")

@@ -1,6 +1,5 @@
 
 return {
     "pearofducks/ansible-vim",
-    dependencies = {
-    },
+    dependencies = { },
 }
